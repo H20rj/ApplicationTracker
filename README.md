@@ -1,5 +1,3 @@
-# **Not Currently working in Terminal. Must use pycharm. Works fine on the local mac where the files are but when I tried to clone the files on my pc none on the imports worked. Including library.py
-
 # Acceptance Tracker
 
 
@@ -9,7 +7,7 @@
 Before running the application, make sure you have installed the required Python modules.
 
 ### Required Modules:
-
+  
 - `colorama`: For colorful terminal output
 - `pwinput`: For securely handling password input
 

@@ -2,7 +2,7 @@
 from library import *
 import time
 from colorama import Fore, init
-#pr \int
+
 # Initialize colorama for coloring in terminal
 init(autoreset=True)
 
