@@ -10,7 +10,7 @@
 
 ## Prerequisites
 
-Before running the application, make sure you have installed the required Python modules.
+Before running the application, make sure you have installed the required Python modules using the setup.sh files.
 
 ### Required Modules:
   
