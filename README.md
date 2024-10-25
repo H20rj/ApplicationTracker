@@ -1,6 +1,12 @@
 # Acceptance Tracker
 
 
+## Installation:
+### 1. Run setup.sh file with terminal.
+### 2. Ensure modules have been properly installed.
+### 3. Run tracker.sh file with terminal.
+
+
 
 ## Prerequisites
 
@@ -11,18 +17,17 @@ Before running the application, make sure you have installed the required Python
 - `colorama`: For colorful terminal output
 - `pwinput`: For securely handling password input
 
-To install these dependencies, run:
+To install these dependencies, run the setup.sh file in the directory.
+This will automagically install the needed modules.
 
-```bash
-pip3 install colorama pwinput
-```
+
 
 ## Usage
 
 The application uses a default username and password:
 
-- **Username**: `USER`
-- **Password**: `PASSWORD`
+- **Username**: `user`
+- **Password**: `password`
 
 After entering the correct credentials, you will be able to use the application to track acceptances.
 Once successful authentication with the default credentials, the user will be able to change the pass word to their own.
@@ -37,11 +42,10 @@ Once successful authentication with the default credentials, the user will be ab
 1. Clone or download the repository.
 2. Install the required modules (as mentioned above).
 3. Open the cloned directory in terminal.
-4. Run the Python script.
+4. Run the Python script using the run.sh file.
 
-```bash
-python3 main.py
-```
+
+
 
 
 
