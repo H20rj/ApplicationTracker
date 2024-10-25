@@ -2,9 +2,9 @@
 
 
 ## Installation:
-### 1. Run setup.sh file with terminal.
+### 1. Run setup.sh file by navigating to the file directory in terminal, then typing sh, and then dragging the setup.sh file into the terminal window.
 ### 2. Ensure modules have been properly installed.
-### 3. Run tracker.sh file with terminal.
+### 3. Run app.sh file inside the directory with terminal by typing sh and then dragging app.sh in to the terminal window.
 
 
 
