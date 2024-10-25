@@ -160,7 +160,7 @@ def default():
 def opening():
     print(Fore.CYAN + """
     ╔═════════════════════════════════════════════════╗
-    ║   Welcome to the Acceptance Tracker!            ║
+    ║   Welcome to the Application Tracker!           ║
     ║   Track your college application status         ║
     ╚═════════════════════════════════════════════════╝
     """)
