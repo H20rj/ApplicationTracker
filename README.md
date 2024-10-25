@@ -1,4 +1,4 @@
-# Acceptance Tracker
+# ApplicationTracker - H20rj
 ## Must have: Python 3.13, pip
 
 ## How to use:
