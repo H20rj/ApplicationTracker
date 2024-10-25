@@ -14,7 +14,7 @@ Before running the application, make sure you have installed the required Python
 To install these dependencies, run:
 
 ```bash
-pip install colorama pwinput
+pip3 install colorama pwinput
 ```
 
 ## Usage
@@ -40,7 +40,7 @@ Once successful authentication with the default credentials, the user will be ab
 4. Run the Python script.
 
 ```bash
-python main.py
+python3 main.py
 ```
 
 
