@@ -1,4 +1,4 @@
 #!/bin/zsh
 
 # pip3 install pwinput colorama
-pip install -r requirements.txt
+pip3 install -r requirements.txt
