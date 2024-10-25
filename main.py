@@ -2,7 +2,10 @@
 from library import *
 import time
 from colorama import Fore, init
-
+from os.path import exists
+from datetime import datetime
+from os import system
+from sys import platform
 # Initialize colorama for coloring in terminal
 init(autoreset=True)
 
@@ -23,9 +26,9 @@ def main():
         ╠═════════════════════════════════════════╣
         ║     1. View status                      ║
         ║     2. Change status                    ║
-        ║     3. Save and exit                    ║
+        ║     3. Set/Change password              ║
         ║     4. Reset to defaults                ║
-        ║     5. Change password                  ║
+        ║     5. Save and exit                    ║
         ╚═════════════════════════════════════════╝
 
         """)
@@ -68,19 +71,21 @@ def main():
             time.sleep(0.75)
             set_user_pw()
 
-        user_pick = input(Fore.YELLOW + "Would you like another action? (Y/N): ").lower()
 
-        while user_pick not in ["y", "n"]:
-            print(Fore.RED + "Invalid input.")
-            user_pick = input(Fore.YELLOW + "Would you like another action (Y/N): ").lower()
 
-        if user_pick == "n":
-            print(Fore.CYAN + "Saving...")
-            save_status()
-            time.sleep(1)
-            print(Fore.CYAN + "Exiting...")
-            is_running = False
+
 
 
 if __name__ == "__main__":
+    if platform == 'darwin':
+        if not exists("version.txt"):
+            with open("version.txt", "w") as f:
+                f.write(str(datetime.now().date()))
+            system("python3 -m pip install -r requirements.txt")
+    if platform == 'win32':
+        if not exists("version.txt"):
+            with open("version.txt", "w") as f:
+                f.write(str(datetime.now().date()))
+            system("py -m pip install -r requirements.txt")
+
     main()

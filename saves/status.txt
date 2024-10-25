@@ -1,4 +1,4 @@
-OU status: Accepted
+OU status: Under Review
 CSU status: Accepted
 CU Boulder status: Under Review
 Texas Tech status: Accepted

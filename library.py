@@ -181,6 +181,7 @@ def authentication():
         print("Authentication failed. Please try again.")
         return False
 
+
 def set_user_pw():
 
     check = authentication()
@@ -190,3 +191,6 @@ def set_user_pw():
         with open('saves/credentials.txt', 'w') as f:
             f.write(f"{correct_username}\n{correct_password}")
         print("Credentials saved successfully.")
+
+
+
