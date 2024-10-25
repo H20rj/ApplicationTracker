@@ -2,7 +2,10 @@
 from library import *
 import time
 from colorama import Fore, init
-
+from os.path import exists
+from datetime import datetime
+from os import system
+from sys import platform
 # Initialize colorama for coloring in terminal
 init(autoreset=True)
 
@@ -50,7 +53,7 @@ def main():
             print("")
             view_status()
 
-        elif user_choice == "3":
+        elif user_choice == "5":
             print(Fore.CYAN + "Saving...")
             time.sleep(1)
             save_status()
@@ -63,7 +66,7 @@ def main():
             default()
             print(Fore.GREEN + "Reset complete.")
 
-        elif user_choice == "5":
+        elif user_choice == "3":
             print("Opening password change UI...")
             time.sleep(0.75)
             set_user_pw()
@@ -71,8 +74,15 @@ def main():
 
 
 
-
 if __name__ == "__main__":
-    check_mac()
-    check_windows()
+    if platform == 'darwin':
+        if not exists("version.txt"):
+            with open("version.txt", "w") as f:
+                f.write(str(datetime.now()))
+            system("python3 -m pip install -r requirements.txt")
+    if platform == 'win32':
+        if not exists("version.txt"):
+            with open("version.txt", "w") as f:
+                f.write(str(datetime.now()))
+            system("py -m pip install -r requirements.txt")
     main()

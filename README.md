@@ -1,16 +1,12 @@
 # Acceptance Tracker
+## Must have: Python 3.13, pip
 
+## How to use:
+### Clone the git repository into a folder on computer
+### Open python in the directory and run 
+### Windows: `py main.py`
+### macOS: `python3 main.py`
 
-## Installation:
-### 1. Run setup.sh file by navigating to the file directory in terminal, then typing sh, and then dragging the setup.sh file into the terminal window.
-### 2. Ensure modules have been properly installed.
-### 3. Run app.sh file inside the directory with terminal by typing sh and then dragging app.sh in to the terminal window.
-
-
-
-## Prerequisites
-
-Before running the application, make sure you have installed the required Python modules using the setup.sh files.
 
 ### Required Modules:
   

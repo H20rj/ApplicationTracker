@@ -3,10 +3,7 @@
 import time
 from colorama import Fore
 import pwinput
-from os.path import exists
-from datetime import datetime
-from os import system
-from sys import platform
+
 ou_status = 'Under Review'
 csu_status = 'Under Review'
 cu_status = 'Under Review'
@@ -195,17 +192,6 @@ def set_user_pw():
             f.write(f"{correct_username}\n{correct_password}")
         print("Credentials saved successfully.")
 
-def check_mac():
-    if platform == 'darwin':
-        if not exists("version.txt"):
-            with open("version.txt", "w") as f:
-                f.write(str(datetime.now().date()))
-            system("python3 -m pip install -r requirements.txt")
-def check_windows():
-    if platform == 'win32':
-        if not exists("version.txt"):
-            with open("version.txt", "w") as f:
-                f.write(str(datetime.now().date()))
-            system("py -m pip install -r requirements.txt")
+
 
 
