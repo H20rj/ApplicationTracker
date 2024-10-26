@@ -70,7 +70,7 @@ def main():
             print("Opening password change UI...")
             time.sleep(0.75)
             set_user_pw()
-
+        time.sleep(0.75)
 
 
 
