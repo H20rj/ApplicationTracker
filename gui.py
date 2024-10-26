@@ -22,6 +22,9 @@ try:
             elif 'Mines status' in line:
                 mi_status = line.split(':')[1].strip()
     print(Fore.GREEN + "Status loaded successfully.")
+    with open('saves/credentials.txt') as f:
+        correct_username, correct_password = f.read().split('\n')
+    print(Fore.GREEN + "Credentials loaded successfully.")
 except FileNotFoundError:
     print(Fore.RED + "No saved status found. Using default values.")
 
@@ -30,20 +33,20 @@ def login():
     password = pass_var.get()
 
     print(user, password)
-    if user == "" and password == "":
+    if user == correct_username and password == correct_password:
         time.sleep(0.5)
         login_page.destroy()
         main_gui_open()  # Open the main GUI only on successful login
     else:
         try_again = customtkinter.CTkLabel(master=frame, text="Incorrect Username or Password", text_color="red")
-        try_again.pack(padx=5, pady=5)
+        try_again.pack(padx=0, pady=0)
 
 # Main GUI function
 def main_gui_open():
     global main_gui, ou_status, csu_status, cu_status, tt_status, tr_status, du_status, mi_status
     main_gui = customtkinter.CTkToplevel()
     main_gui.title("Application Tracker")
-    main_gui.geometry("300x500+620+160")
+    main_gui.geometry("300x550+620+160")
     mainframe = customtkinter.CTkFrame(master=main_gui)
     mainframe.pack(pady=20, padx=20, fill="both", expand=True)
     status_frame = customtkinter.CTkFrame(master=mainframe, width=225, height=250)
@@ -58,12 +61,31 @@ def main_gui_open():
                                                            f"Mines Status: {mi_status}\n\n"
                                                            , text_color="white")
     status.place(relx=0.50, rely=0.52, anchor="center")
-
+    def reset_to_default():
+        global ou_status, csu_status, cu_status, tt_status, tr_status, du_status, mi_status
+        ou_status = 'Under Review'
+        csu_status = 'Under Review'
+        cu_status = 'Under Review'
+        tt_status = 'Under Review'
+        tr_status = 'Under Review'
+        du_status = 'Under Review'
+        mi_status = 'Under Review'
+        with open("saves/status.txt", "w") as file:
+            file.write(f"OU status: {ou_status}\n")
+            file.write(f"CSU status: {csu_status}\n")
+            file.write(f"CU Boulder status: {cu_status}\n")
+            file.write(f"Texas Tech status: {tt_status}\n")
+            file.write(f"Trinity status: {tr_status}\n")
+            file.write(f"DU status: {du_status}\n")
+            file.write(f"Mines status: {mi_status}\n")
+        print("Successfully reset to defaults.")
     buttonframe = customtkinter.CTkFrame(master=mainframe, width=225, height=100)
     buttonframe.pack(pady=15, padx=15, fill="both", expand=False)
     buttonframe.place(relx = 0.5, rely = 0.8, anchor = "center")
     change_status = customtkinter.CTkButton(master = buttonframe, text = "Change status", command = change_status_gui)
     change_status.pack(pady=12, padx=10)
+    default_button = customtkinter.CTkButton(master=buttonframe, text="Reset to default", command=reset_to_default)
+    default_button.pack(pady=12, padx=10)
     quit_button = customtkinter.CTkButton(master=buttonframe, text="Quit", command=quit)
     quit_button.pack(pady=12, padx=10)
 def change_status_gui():
@@ -151,7 +173,7 @@ customtkinter.set_default_color_theme("dark-blue")
 # Initialize the login page
 login_page = customtkinter.CTk()
 login_page.title("Login Page")
-login_page.geometry("300x350+620+225")
+login_page.geometry("300x380+620+225")
 login_page.resizable(False, False)
 
 # Variables for username and password

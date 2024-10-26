@@ -42,10 +42,10 @@ Once successful authentication with the default credentials, the user will be ab
 
 
 
-## Currently experimenting with GUI. Just for viewing status right now. Must set statuses in main.py first, then run test_gui.py with:
+## Currently experimenting with GUI. Just for viewing status and changing statuses right now. Must set statuses in main.py first, then run test_gui.py with:
 Windows: `py test_gui.py`\
 macOS: `python3 test_gui.py`
-
+## All save files work, so the GUI and CLI are interchangeable; however, you can only change the username and password in the CLI. 
 ## About
 
 This project was created on a sick day at school. It may not be fully optimized, but it’s a good starting point for tracking acceptances.
