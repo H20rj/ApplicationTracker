@@ -3,6 +3,7 @@
 import time
 from colorama import Fore
 import pwinput
+import customtkinter
 
 ou_status = 'Under Review'
 csu_status = 'Under Review'
@@ -195,3 +196,40 @@ def set_user_pw():
 
 
 
+def GUI():
+    customtkinter.set_appearance_mode("dark")
+    customtkinter.set_default_color_theme("dark-blue")
+
+    root = customtkinter.CTk()
+    root.geometry("500x400")
+    user_var = customtkinter.StringVar()
+    pass_var = customtkinter.StringVar()
+    def login():
+        user = user_var.get()
+        pass1 = pass_var.get()
+
+        print(f"Username is {user} and Password is {pass1}.")
+    frame = customtkinter.CTkFrame(master=root)
+
+    frame.pack(pady=20, padx=60, fill="both", expand=True)
+
+    label = customtkinter.CTkLabel(master=frame, text="Login System")
+    label.pack(pady=12, padx=10)
+
+    user_label = customtkinter.CTkLabel(master=frame, text="Username")
+    user_label.pack(pady=2, padx=10)
+    entry = customtkinter.CTkEntry(master=frame, textvariable=user_var, placeholder_text="Username")
+    entry.pack(pady=12, padx=10)
+
+    pass_label = customtkinter.CTkLabel(master=frame, text="Password")
+    pass_label.pack(pady=2, padx=10)
+    entryp = customtkinter.CTkEntry(master=frame, placeholder_text="Password", show="*", textvariable=pass_var)
+    entryp.pack(pady=12, padx=10)
+
+    button = customtkinter.CTkButton(master=frame, text="Login", command=login)
+    button.pack(pady=12, padx=10)
+
+    checkbox = customtkinter.CTkCheckBox(master=frame, text="Remember Me")
+    checkbox.pack(pady=12, padx=10)
+
+    root.mainloop()
