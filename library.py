@@ -3,7 +3,7 @@
 import time
 from colorama import Fore
 import pwinput
-import customtkinter
+
 
 ou_status = 'Under Review'
 csu_status = 'Under Review'

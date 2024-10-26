@@ -42,8 +42,9 @@ Once successful authentication with the default credentials, the user will be ab
 
 
 
-
-
+## Currently experimenting with GUI. Just for viewing status right now. Must set statuses in main.py first, then run test_gui.py with:
+Windows: `py test_gui.py`\
+macOS: `python3 test_gui.py`
 
 ## About
 
