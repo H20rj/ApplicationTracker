@@ -1,8 +1,29 @@
 import time
 import customtkinter
-
+from colorama import Fore
 from library import ou_status, csu_status, cu_status, tt_status, tr_status, du_status, mi_status
 
+try:
+    with open('saves/status.txt', 'r') as file:
+        lines = file.readlines()
+        for line in lines:
+            if 'OU status' in line:
+                ou_status = line.split(':')[1].strip()
+            elif 'CSU status' in line:
+                csu_status = line.split(':')[1].strip()
+            elif 'CU Boulder status' in line:
+                cu_status = line.split(':')[1].strip()
+            elif 'Texas Tech status' in line:
+                tt_status = line.split(':')[1].strip()
+            elif 'Trinity status' in line:
+                tr_status = line.split(':')[1].strip()
+            elif 'DU status' in line:
+                du_status = line.split(':')[1].strip()
+            elif 'Mines status' in line:
+                mi_status = line.split(':')[1].strip()
+    print(Fore.GREEN + "Status loaded successfully.")
+except FileNotFoundError:
+    print(Fore.RED + "No saved status found. Using default values.")
 
 def login():
     user = user_var.get()
