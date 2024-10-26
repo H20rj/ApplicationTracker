@@ -30,7 +30,7 @@ def login():
     password = pass_var.get()
 
     print(user, password)
-    if user == "user" and password == "password":
+    if user == "" and password == "":
         time.sleep(0.5)
         login_page.destroy()
         main_gui_open()  # Open the main GUI only on successful login
@@ -40,13 +40,15 @@ def login():
 
 # Main GUI function
 def main_gui_open():
+    global main_gui, ou_status, csu_status, cu_status, tt_status, tr_status, du_status, mi_status
     main_gui = customtkinter.CTkToplevel()
-    main_gui.geometry("1000x700")
+    main_gui.title("Application Tracker")
+    main_gui.geometry("300x500+620+160")
     mainframe = customtkinter.CTkFrame(master=main_gui)
-    mainframe.pack(pady=20, padx=60, fill="both", expand=True)
+    mainframe.pack(pady=20, padx=20, fill="both", expand=True)
     status_frame = customtkinter.CTkFrame(master=mainframe, width=225, height=250)
-    status_frame.pack(pady=50, padx=60, fill="both", expand=True)
-    status_frame.place(relx = 0.15, rely = 0.22, anchor = "center")
+    status_frame.pack(pady=15, padx=20, fill="both", expand=True)
+    status_frame.place(relx = 0.5, rely = 0.3, anchor = "center")
     status = customtkinter.CTkLabel(master=status_frame, text=f"OU Status: {ou_status}\n\n"
                                                            f"CSU Status: {csu_status}\n\n"
                                                            f"CU Status: {cu_status}\n\n"
@@ -57,14 +59,100 @@ def main_gui_open():
                                                            , text_color="white")
     status.place(relx=0.50, rely=0.52, anchor="center")
 
+    buttonframe = customtkinter.CTkFrame(master=mainframe, width=225, height=100)
+    buttonframe.pack(pady=15, padx=15, fill="both", expand=False)
+    buttonframe.place(relx = 0.5, rely = 0.8, anchor = "center")
+    change_status = customtkinter.CTkButton(master = buttonframe, text = "Change status", command = change_status_gui)
+    change_status.pack(pady=12, padx=10)
+    quit_button = customtkinter.CTkButton(master=buttonframe, text="Quit", command=quit)
+    quit_button.pack(pady=12, padx=10)
+def change_status_gui():
+    global change_status_page
+    main_gui.withdraw()
+    change_status_page = customtkinter.CTkToplevel()
+    change_status_page.title("Change Status")
+    change_status_page.geometry("225x300+670+260")
+    change_frame = customtkinter.CTkFrame(master=change_status_page)
+    change_frame.pack(pady=15, padx=15, fill="both", expand=True)
+
+    def school_dropdown_callback(school):
+        print(f"School: {school}")
+    def status_dropdown_callback(status):
+        print(f"Status: {status}")
 
 
+    school_dropdown_var = customtkinter.StringVar(value = "Select school")
+    school_dropdown = customtkinter.CTkOptionMenu(master = change_frame,
+                                                  values = ["OU", "CSU", "CU Boulder", "Texas Tech", "Trinity", "DU", "Mines"],
+                                                  command = school_dropdown_callback,
+                                                  variable = school_dropdown_var)
+    school_dropdown.pack(pady=12, padx=10)
+    school_dropdown.place(relx = 0.5,rely=0.2, anchor = "center")
+    status_dropdown_var = customtkinter.StringVar(value = "Select status")
+    status_dropdown = customtkinter.CTkOptionMenu(master = change_frame,
+                                                  values = ["Accepted", "Rejected", "Under Review", "Waitlisted", "Deferred"],
+                                                  command = status_dropdown_callback,
+                                                  variable = status_dropdown_var)
+    status_dropdown.pack(pady=12, padx=10)
+    status_dropdown.place(relx = 0.5, rely=0.4, anchor = "center")
+
+    def save_change_status():
+        global ou_status, csu_status, cu_status, tt_status, tr_status, du_status, mi_status
+        if school_dropdown_var.get() == "OU":
+            ou_status = status_dropdown_var.get()
+        elif school_dropdown_var.get() == "CSU":
+            csu_status = status_dropdown_var.get()
+        elif school_dropdown_var.get() == "CU Boulder":
+            cu_status = status_dropdown_var.get()
+        elif school_dropdown_var.get() == "Texas Tech":
+            tt_status = status_dropdown_var.get()
+        elif school_dropdown_var.get() == "Trinity":
+            tr_status = status_dropdown_var.get()
+        elif school_dropdown_var.get() == "DU":
+            du_status = status_dropdown_var.get()
+        elif school_dropdown_var.get() == "Mines":
+            mi_status = status_dropdown_var.get()
+        with open("saves/status.txt", "w") as file:
+            file.write(f"OU status: {ou_status}\n")
+            file.write(f"CSU status: {csu_status}\n")
+            file.write(f"CU Boulder status: {cu_status}\n")
+            file.write(f"Texas Tech status: {tt_status}\n")
+            file.write(f"Trinity status: {tr_status}\n")
+            file.write(f"DU status: {du_status}\n")
+            file.write(f"Mines status: {mi_status}\n")
+        print("saved")
+    save_button = customtkinter.CTkButton(master=change_frame, text="Save", command=save_change_status)
+    save_button.pack(pady=12, padx=10)
+    save_button.place(relx=0.50, rely=0.65, anchor="center")
+    exit_button = customtkinter.CTkButton(master=change_frame, text="Exit", command=exit_change_status)
+    exit_button.pack(pady=12, padx=10)
+    exit_button.place(relx=0.50, rely=0.85, anchor="center")
+def exit_change_status():
+    time.sleep(0.4)
+    change_status_page.destroy()
+    main_gui_open()
+
+def quit_gui():
+    with open("saves/status.txt", "w") as file:
+        file.write(f"OU status: {ou_status}\n")
+        file.write(f"CSU status: {csu_status}\n")
+        file.write(f"CU Boulder status: {cu_status}\n")
+        file.write(f"Texas Tech status: {tt_status}\n")
+        file.write(f"Trinity status: {tr_status}\n")
+        file.write(f"DU status: {du_status}\n")
+        file.write(f"Mines status: {mi_status}\n")
+    print("saved")
+    main_gui.destroy()
+    change_status_page.destroy()
+    print("quit")
 customtkinter.set_appearance_mode("dark")
 customtkinter.set_default_color_theme("dark-blue")
 
 # Initialize the login page
 login_page = customtkinter.CTk()
-login_page.geometry("500x400")
+login_page.title("Login Page")
+login_page.geometry("300x350+620+225")
+login_page.resizable(False, False)
 
 # Variables for username and password
 user_var = customtkinter.StringVar()
@@ -74,9 +162,9 @@ pass_var = customtkinter.StringVar()
 
 # Create the login frame
 frame = customtkinter.CTkFrame(master=login_page)
-frame.pack(pady=20, padx=60, fill="both", expand=True)
+frame.pack(pady=20, padx=20, fill="both", expand=True)
 
-label = customtkinter.CTkLabel(master=frame, text="Login System")
+label = customtkinter.CTkLabel(master=frame, text=f"Application Tracker \n Login", font = ("", 24))
 label.pack(pady=12, padx=10)
 
 # Username Entry
