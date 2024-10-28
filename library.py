@@ -48,20 +48,25 @@ def change_status():
        3. Under Review
        4. Waitlisted
        5. Deferred
+       6. Committed
+       7. Pending Scholarship Offer
     """)
 
-    new_status = input(Fore.GREEN + "Enter choice here (1/2/3/4/5): ")
+    new_status = input(Fore.GREEN + "Enter choice here (1/2/3/4/5/6/7): ")
 
-    while new_status not in ['1', '2', '3', '4', '5']:
+    while new_status not in ['1', '2', '3', '4', '5', '6', '7', '69']:
         print(Fore.RED + "Invalid input.")
-        new_status = input(Fore.GREEN + "Enter choice here (1/2/3/4/5): ")
+        new_status = input(Fore.GREEN + "Enter choice here (1/2/3/4/5/6/7): ")
 
     status_mapping = {
         '1': 'Accepted',
         '2': 'Rejected',
         '3': 'Under Review',
         '4': 'Waitlisted',
-        '5': 'Deferred'
+        '5': 'Deferred',
+        '6': 'Committed',
+        '7': 'Pending Scholarship Offer',
+        '69': 'LOL!!! 69! so funny!'
     }
 
     new_status = status_mapping[new_status]

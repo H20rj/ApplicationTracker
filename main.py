@@ -79,10 +79,10 @@ if __name__ == "__main__":
         if not exists("version.txt"):
             with open("version.txt", "w") as f:
                 f.write(str(datetime.now()))
-            system("python3 -m pip install -r requirements.txt")
+            system("python3 -m pip install -r saves/requirements.txt")
     if platform == 'win32':
         if not exists("version.txt"):
             with open("version.txt", "w") as f:
                 f.write(str(datetime.now()))
-            system("py -m pip install -r requirements.txt")
+            system("py -m pip install -r saves/requirements.txt")
     main()

@@ -79,17 +79,17 @@ def main_gui_open():
             file.write(f"DU status: {du_status}\n")
             file.write(f"Mines status: {mi_status}\n")
         print("Successfully reset to defaults.")
-    buttonframe = customtkinter.CTkFrame(master=mainframe, width=225, height=100)
-    buttonframe.pack(pady=15, padx=15, fill="both", expand=False)
-    buttonframe.place(relx = 0.5, rely = 0.8, anchor = "center")
-    change_status = customtkinter.CTkButton(master = buttonframe, text = "Change status", command = change_status_gui)
+    button_frame = customtkinter.CTkFrame(master=mainframe, width=225, height=100)
+    button_frame.pack(pady=15, padx=15, fill="both", expand=False)
+    button_frame.place(relx = 0.5, rely = 0.8, anchor = "center")
+    change_status = customtkinter.CTkButton(master = button_frame, text = "Change status", command = change_status_gui)
     change_status.pack(pady=12, padx=10)
-    default_button = customtkinter.CTkButton(master=buttonframe, text="Reset to default", command=reset_to_default)
+    default_button = customtkinter.CTkButton(master=button_frame, text="Reset to default", command=reset_to_default)
     default_button.pack(pady=12, padx=10)
-    change_pw_button = customtkinter.CTkButton(master=buttonframe, text="Change Password", command=change_password)
+    change_pw_button = customtkinter.CTkButton(master=button_frame, text="Change Password", command=change_password)
     change_pw_button.pack(pady=12, padx=10)
 
-    quit_button = customtkinter.CTkButton(master=buttonframe, text="Quit", command=quit)
+    quit_button = customtkinter.CTkButton(master=button_frame, text="Quit", command=quit)
     quit_button.pack(pady=12, padx=10)
 def change_status_gui():
     global change_status_page
@@ -115,7 +115,7 @@ def change_status_gui():
     school_dropdown.place(relx = 0.5,rely=0.2, anchor = "center")
     status_dropdown_var = customtkinter.StringVar(value = "Select status")
     status_dropdown = customtkinter.CTkOptionMenu(master = change_frame,
-                                                  values = ["Accepted", "Rejected", "Under Review", "Waitlisted", "Deferred"],
+                                                  values = ["Accepted", "Rejected", "Under Review", "Waitlisted", "Deferred", "Committed", "Pending Scholarship Offer"],
                                                   command = status_dropdown_callback,
                                                   variable = status_dropdown_var)
     status_dropdown.pack(pady=12, padx=10)
