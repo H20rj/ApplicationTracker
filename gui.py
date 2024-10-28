@@ -22,7 +22,7 @@ try:
             elif 'Mines status' in line:
                 mi_status = line.split(':')[1].strip()
     print(Fore.GREEN + "Status loaded successfully.")
-    with open('saves/credentials.txt') as f:
+    with open('saves/credentials.txt', 'r') as f:
         correct_username, correct_password = f.read().split('\n')
     print(Fore.GREEN + "Credentials loaded successfully.")
 except FileNotFoundError:
@@ -46,11 +46,11 @@ def main_gui_open():
     global main_gui, ou_status, csu_status, cu_status, tt_status, tr_status, du_status, mi_status
     main_gui = customtkinter.CTkToplevel()
     main_gui.title("Application Tracker")
-    main_gui.geometry("300x550+620+160")
+    main_gui.geometry("300x600+620+160")
     mainframe = customtkinter.CTkFrame(master=main_gui)
     mainframe.pack(pady=20, padx=20, fill="both", expand=True)
     status_frame = customtkinter.CTkFrame(master=mainframe, width=225, height=250)
-    status_frame.pack(pady=15, padx=20, fill="both", expand=True)
+    status_frame.pack(pady=5, padx=20, fill="both", expand=True)
     status_frame.place(relx = 0.5, rely = 0.3, anchor = "center")
     status = customtkinter.CTkLabel(master=status_frame, text=f"OU Status: {ou_status}\n\n"
                                                            f"CSU Status: {csu_status}\n\n"
@@ -86,6 +86,9 @@ def main_gui_open():
     change_status.pack(pady=12, padx=10)
     default_button = customtkinter.CTkButton(master=buttonframe, text="Reset to default", command=reset_to_default)
     default_button.pack(pady=12, padx=10)
+    change_pw_button = customtkinter.CTkButton(master=buttonframe, text="Change Password", command=change_password)
+    change_pw_button.pack(pady=12, padx=10)
+
     quit_button = customtkinter.CTkButton(master=buttonframe, text="Quit", command=quit)
     quit_button.pack(pady=12, padx=10)
 def change_status_gui():
@@ -164,9 +167,73 @@ def quit_gui():
         file.write(f"DU status: {du_status}\n")
         file.write(f"Mines status: {mi_status}\n")
     print("saved")
+    time.sleep(0.4)
     main_gui.destroy()
     change_status_page.destroy()
     print("quit")
+
+def change_password():
+    global correct_username, correct_password
+    with open('saves/credentials.txt', 'r') as f:
+        correct_username, correct_password = f.read().split('\n')
+    print(Fore.GREEN + "Credentials loaded successfully.")
+
+    old_user_var= customtkinter.StringVar()
+    old_pw_var = customtkinter.StringVar()
+    new_user_var = customtkinter.StringVar()
+    new_pw_var = customtkinter.StringVar()
+
+    main_gui.withdraw()
+    change_pw_page = customtkinter.CTkToplevel()
+    change_pw_page.title("Change Password")
+    change_pw_page.geometry("300x550+600+150")
+    change_pw_page.resizable(False, False)
+    change_pw_frame = customtkinter.CTkFrame(master=change_pw_page)
+    change_pw_frame.pack(pady=10, padx=10, fill="both", expand=True)
+    change_pw_label = customtkinter.CTkLabel(master=change_pw_frame, text="Change Password", font = ("", 24))
+    change_pw_label.pack(pady=12, padx=10)
+
+    old_user_label = customtkinter.CTkLabel(master=change_pw_frame, text="Old Username")
+    old_user_label.pack(pady=2, padx=10)
+    entry_old_user = customtkinter.CTkEntry(master = change_pw_frame, textvariable = old_user_var)
+    entry_old_user.pack(pady=12, padx=10)
+
+    old_pw_label = customtkinter.CTkLabel(master=change_pw_frame, text="Old Password")
+    old_pw_label.pack(pady=2, padx=10)
+    entry_old_pw = customtkinter.CTkEntry(master=change_pw_frame, textvariable=old_pw_var, show="*")
+    entry_old_pw.pack(pady=12, padx=10)
+
+    new_user_label = customtkinter.CTkLabel(master=change_pw_frame, text="New Username")
+    new_user_label.pack(pady=2, padx=10)
+    entry_new_user = customtkinter.CTkEntry(master=change_pw_frame, textvariable=new_user_var)
+    entry_new_user.pack(pady=2, padx=10)
+    new_pw_label = customtkinter.CTkLabel(master=change_pw_frame, text="New Password")
+    new_pw_label.pack(pady=2, padx=10)
+    entry_new_pw = customtkinter.CTkEntry(master=change_pw_frame, textvariable=new_pw_var, show="*")
+    entry_new_pw.pack(pady=2, padx=10)
+    def check_password():
+        if old_user_var.get() == correct_username and old_pw_var.get() == correct_password:
+            print(new_user_var.get(), new_pw_var.get())
+            success_label = customtkinter.CTkLabel(master=change_pw_frame,text="Correct username and password", text_color="green")
+            success_label.pack(pady=12, padx=10)
+            try:
+                with open("saves/credentials.txt", "w") as f:
+                    f.write(f"{new_user_var.get()}\n{new_pw_var.get()}")
+                print(Fore.GREEN + "New Password saved successfully.")
+            except FileNotFoundError:
+                print("Password not saved. Please try again later.")
+
+        else:
+            error_label = customtkinter.CTkLabel(master=change_pw_frame, text="Incorrect username or password", text_color="red")
+            error_label.pack(pady=12, padx=10)
+    enter_button = customtkinter.CTkButton(master=change_pw_frame, text="Enter", command=check_password)
+    enter_button.pack(pady = 12, padx = 10)
+    def quit_change_pw():
+        change_pw_page.destroy()
+        time.sleep(0.4)
+        main_gui_open()
+    quit_change_pw_button = customtkinter.CTkButton(master = change_pw_frame, text="Exit", command = quit_change_pw)
+    quit_change_pw_button.pack(pady = 12, padx = 10)
 customtkinter.set_appearance_mode("dark")
 customtkinter.set_default_color_theme("dark-blue")
 

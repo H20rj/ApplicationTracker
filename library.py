@@ -5,13 +5,13 @@ from colorama import Fore
 import pwinput
 
 
-ou_status = 'Under Review'
-csu_status = 'Under Review'
-cu_status = 'Under Review'
-tt_status = 'Under Review'
-tr_status = 'Under Review'
-du_status = 'Under Review'
-mi_status = 'Under Review'
+ou_status = ''
+csu_status = ''
+cu_status = ''
+tt_status = ''
+tr_status = ''
+du_status = ''
+mi_status = ''
 
 def change_status():
     global ou_status, csu_status, cu_status, tt_status, tr_status, du_status, mi_status
@@ -176,22 +176,23 @@ def authentication():
     password = pwinput.pwinput("Password: ", "*")
 
     if username == correct_username and password == correct_password:
-        print("Authentication successful.")
+        print(Fore.GREEN + "Authentication successful.")
         return True
     else:
-        print("Authentication failed. Please try again.")
+        print(Fore.RED + "Authentication failed. Please try again.")
         return False
 
 
 def set_user_pw():
 
     check = authentication()
-    if check:
-        correct_username = input("Enter a new username: ")
-        correct_password = pwinput.pwinput("Enter a new password: ", "*")
-        with open('saves/credentials.txt', 'w') as f:
-            f.write(f"{correct_username}\n{correct_password}")
-        print("Credentials saved successfully.")
+    while not check:
+        check = authentication()
+    correct_username = input("Enter a new username: ")
+    correct_password = pwinput.pwinput("Enter a new password: ", "*")
+    with open('saves/credentials.txt', 'w') as f:
+        f.write(f"{correct_username}\n{correct_password}")
+    print("Credentials saved successfully.")
 
 
 
